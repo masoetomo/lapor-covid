@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\DataCovidCollection;
 use App\Models\Data_covid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Models\User;
+use Illuminate\Http\Response;
+use SebastianBergmann\Environment\Console;
 
 class DataCovidController extends Controller
 {
@@ -17,7 +20,12 @@ class DataCovidController extends Controller
      */
     public function index()
     {
-        return Inertia::render('DataCovid');
+        $value = Auth::id();
+        $data = Data_covid::where('id_user', $value)->paginate(5);
+        return $data;
+        // return response()->json(
+        //     new DataCovidCollection($data)
+        // );
     }
 
     /**
@@ -38,7 +46,6 @@ class DataCovidController extends Controller
      */
     public function store(Request $request)
     {
-
         $this->validate($request,[
             'date'=>'required|date',
             'penambahanKasus'=>'required',
@@ -75,7 +82,7 @@ class DataCovidController extends Controller
      */
     public function show($id)
     {
-        //
+        return Data_covid::find($id);
     }
 
     /**
@@ -98,7 +105,32 @@ class DataCovidController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'date'=>'required|date',
+            'penambahanKasus'=>'required',
+            'dalamPerawatan'=>'required',
+            'penambahanSembuh'=>'required',
+            'sembuh'=>'required',
+            'meninggal'=>'required',
+            'sakitBukanCovid'=>'required'
+        ]);
+        // $value = Auth::id();
+        $value = $request->session()->get('id');
+
+        // var_dump($value);
+        $dataCovid = Data_covid::find($id);
+        $dataCovid->tanggal = $request->date;
+        $dataCovid->penambahan_kasus = $request->penambahanKasus;
+        $dataCovid->dalam_perawatan = $request->dalamPerawatan;
+        $dataCovid->penambahan_sembuh = $request->penambahanSembuh;
+        $dataCovid->sembuh = $request->sembuh;
+        $dataCovid->meninggal = $request->meninggal;
+        $dataCovid->sakit_bukan_covid = $request->sakitBukanCovid;
+        $dataCovid->id_user = $value;
+
+        $dataCovid->save();
+        // return response($value,201);
+        return response('Successfully Updated a Data Covid', 200);
     }
 
     /**
@@ -109,6 +141,7 @@ class DataCovidController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Data_covid::find($id)->delete();
+        return response('Successfully Deleted a Data Covid', 200);
     }
 }

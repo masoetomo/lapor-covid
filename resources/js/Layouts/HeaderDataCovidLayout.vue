@@ -267,13 +267,15 @@ import 'vue2-datepicker/index.css';
 
             return {
 
+                dataVersion: 0,
+
                 editMode: false,
 
                 isOpen: false,
 
-                csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                // csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 
-                _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                // _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 
                 form: {
 
@@ -337,6 +339,9 @@ import 'vue2-datepicker/index.css';
                   icon:'success',
                   title: res.data
                 })
+                this.dataVersion += 1;
+                window.location.href = 'data-covid';
+                this.closeModal();
               } else {
                 Toast.fire({
                   icon:'error'
@@ -349,7 +354,6 @@ import 'vue2-datepicker/index.css';
                 // this.closeModal();
 
                 // this.editMode = false;
-
             },
     }
     }

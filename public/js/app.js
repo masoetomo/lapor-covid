@@ -3382,10 +3382,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   props: ['data', 'errors'],
   data: function data() {
     return {
+      dataVersion: 0,
       editMode: false,
       isOpen: false,
-      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-      _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+      // csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+      // _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       form: {
         dalamPerawatan: null,
         penambahanKasus: null,
@@ -3415,6 +3416,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       };
     },
     save: function save(data) {
+      var _this = this;
+
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
@@ -3433,6 +3436,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     icon: 'success',
                     title: res.data
                   });
+                  _this.dataVersion += 1;
+                  window.location.href = 'data-covid';
+
+                  _this.closeModal();
                 } else {
                   Toast.fire({
                     icon: 'error'
@@ -3450,6 +3457,156 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee);
       }))();
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Layouts/Pagination2.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Layouts/Pagination2.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    pagination: {
+      type: Object,
+      required: true
+    },
+    offset: {
+      type: Number,
+      "default": 4
+    }
+  },
+  data: function data() {
+    return {
+      disablePrev: 0,
+      disableNext: 0
+    };
+  },
+  computed: {
+    pages: function pages() {
+      if (!this.pagination.to) {
+        return null;
+      }
+
+      var from = this.pagination.current_page - this.offset;
+
+      if (from < 1) {
+        from = 1;
+      }
+
+      var to = from + this.offset * 2;
+
+      if (to >= this.pagination.last_page) {
+        to = this.pagination.last_page;
+      }
+
+      var pages = [];
+
+      for (var page = from; page <= to; page++) {
+        pages.push(page);
+      }
+
+      return pages;
+    }
+  },
+  methods: {
+    change: function change(page) {
+      if (page < 1) {
+        return;
+      } else if (page > this.pagination.last_page) {
+        return;
+      } else {
+        this.pagination.current_page = page;
+        this.$emit('paginate');
+      } // console.log(this.disableNext);
+
     }
   }
 });
@@ -3830,9 +3987,18 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
-/* harmony import */ var _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Jetstream/Button.vue */ "./resources/js/Jetstream/Button.vue");
-/* harmony import */ var _Layouts_HeaderDataCovidLayout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Layouts/HeaderDataCovidLayout */ "./resources/js/Layouts/HeaderDataCovidLayout.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
+/* harmony import */ var _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Jetstream/Button.vue */ "./resources/js/Jetstream/Button.vue");
+/* harmony import */ var _Layouts_HeaderDataCovidLayout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Layouts/HeaderDataCovidLayout */ "./resources/js/Layouts/HeaderDataCovidLayout.vue");
+/* harmony import */ var _Layouts_Pagination2_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Layouts/Pagination2.vue */ "./resources/js/Layouts/Pagination2.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -3970,26 +4136,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
-    Button: _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    HeaderDataCovidLayout: _Layouts_HeaderDataCovidLayout__WEBPACK_IMPORTED_MODULE_2__["default"]
+    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Button: _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    HeaderDataCovidLayout: _Layouts_HeaderDataCovidLayout__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Pagination: _Layouts_Pagination2_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   data: function data() {
     return {
+      offset: 4,
+      pagination: {
+        total: null,
+        per_page: null,
+        current_page: null,
+        last_page: null,
+        from: null,
+        to: null
+      },
       dataCovids: [],
       dataCovid: {
         dalamPerawatan: null,
@@ -4003,7 +4171,65 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    getDataCovids: function getDataCovids() {}
+    getDataCovids: function getDataCovids() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var current_page, pageNum, res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                current_page = _this.pagination.current_page;
+                pageNum = current_page ? current_page : 1;
+                console.log(pageNum);
+                _context.prev = 3;
+                _context.next = 6;
+                return axios.get('api/datacovid?page=' + pageNum);
+
+              case 6:
+                res = _context.sent;
+                console.log(res.data.data);
+                _this.dataCovids = res.data.data;
+                _this.pagination.total = res.data.total;
+                _this.pagination.per_page = res.data.per_page;
+                _this.pagination.to = res.data.to;
+                _this.pagination.from = res.data.from;
+                _this.pagination.current_page = res.data.current_page;
+                _this.pagination.last_page = res.data.last_page;
+                _context.next = 20;
+                break;
+
+              case 17:
+                _context.prev = 17;
+                _context.t0 = _context["catch"](3);
+                console.log(_context.t0);
+
+              case 20:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[3, 17]]);
+      }))();
+    },
+    fetchUsers: function fetchUsers() {
+      var _this2 = this;
+
+      var current_page = this.pagination.current_page;
+      var pageNum = current_page ? current_page : 1;
+      axios.get('api/datacovid?page=${pageNum}').then(function (response) {
+        _this2.pagination = response.data.pagination;
+        _this2.dataCovids = response.data.datas;
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    }
+  },
+  beforeMount: function beforeMount() {// this.getDataCovids();
+  },
+  created: function created() {
+    this.getDataCovids(); // this.fetchUsers();
   }
 });
 
@@ -53780,6 +54006,231 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Layouts/Pagination2.vue?vue&type=template&id=3e1d19f8&":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Layouts/Pagination2.vue?vue&type=template&id=3e1d19f8& ***!
+  \***********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass:
+        "bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
+    },
+    [
+      _c("div", { staticClass: "flex-1 flex justify-between sm:hidden" }, [
+        _c(
+          "a",
+          {
+            staticClass:
+              "relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:text-gray-500",
+            attrs: { href: "#", disabled: _vm.disablePrev == 1 },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.change(_vm.pagination.current_page - 1)
+              }
+            }
+          },
+          [_vm._v("\n      Previous\n    ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass:
+              "ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:text-gray-500",
+            attrs: { href: "#", disabled: _vm.disableNext == 1 },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.change(_vm.pagination.current_page + 1)
+              }
+            }
+          },
+          [_vm._v("\n      Next\n    ")]
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "hidden sm:flex-1 sm:flex sm:items-center sm:justify-between md:flex-auto"
+        },
+        [
+          _c("div", [
+            _c("p", { staticClass: "text-sm text-gray-700" }, [
+              _vm._v("\n        Showing\n        "),
+              _c("span", { staticClass: "font-medium" }, [
+                _vm._v(_vm._s(_vm.pagination.current_page))
+              ]),
+              _vm._v("\n        to\n        "),
+              _c("span", { staticClass: "font-medium" }, [
+                _vm._v(_vm._s(_vm.pagination.to))
+              ]),
+              _vm._v("\n        of\n        "),
+              _c("span", { staticClass: "font-medium" }, [
+                _vm._v(_vm._s(_vm.pagination.total))
+              ]),
+              _vm._v("\n        results\n      ")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "nav",
+              {
+                staticClass: "relative z-0 inline-flex shadow-sm -space-x-px",
+                attrs: { "aria-label": "Pagination" }
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50",
+                    attrs: { href: "#", disabled: _vm.disablePrev == 1 },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.change(_vm.pagination.current_page - 1)
+                      }
+                    }
+                  },
+                  [
+                    _c("span", { staticClass: "sr-only" }, [
+                      _vm._v("Previous")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "svg",
+                      {
+                        staticClass: "h-5 w-5",
+                        attrs: {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          viewBox: "0 0 20 20",
+                          fill: "currentColor",
+                          "aria-hidden": "true"
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            "fill-rule": "evenodd",
+                            d:
+                              "M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z",
+                            "clip-rule": "evenodd"
+                          }
+                        })
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  {
+                    staticClass:
+                      "flex list-reset border border-grey-light rounded w-auto front-sans"
+                  },
+                  _vm._l(_vm.pages, function(page) {
+                    return _c("li", { key: page }, [
+                      _c(
+                        "a",
+                        {
+                          class: [
+                            page == _vm.pagination.current_page
+                              ? "text-gray-400 bg-blue border-r border-blue"
+                              : "hover:text-gray-400 hover:bg-blue text-blue border-r border-grey-light",
+                            "block px-3 py-2"
+                          ],
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              $event.stopPropagation()
+                              return _vm.change(page)
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(page) +
+                              "\n            "
+                          )
+                        ]
+                      )
+                    ])
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50",
+                    attrs: { href: "#", disabled: _vm.disableNext == 1 },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.change(_vm.pagination.current_page + 1)
+                      }
+                    }
+                  },
+                  [
+                    _c("span", { staticClass: "sr-only" }, [_vm._v("Next")]),
+                    _vm._v(" "),
+                    _c(
+                      "svg",
+                      {
+                        staticClass: "h-5 w-5",
+                        attrs: {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          viewBox: "0 0 20 20",
+                          fill: "currentColor",
+                          "aria-hidden": "true"
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            "fill-rule": "evenodd",
+                            d:
+                              "M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z",
+                            "clip-rule": "evenodd"
+                          }
+                        })
+                      ]
+                    )
+                  ]
+                )
+              ]
+            )
+          ])
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/API/ApiTokenManager.vue?vue&type=template&id=00438600&":
 /*!*****************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/API/ApiTokenManager.vue?vue&type=template&id=00438600& ***!
@@ -54567,381 +55018,319 @@ var render = function() {
                       "bg-white overflow-hidden shadow-xl sm:rounded-lg"
                   },
                   [
-                    _c("div", { staticClass: "flex flex-col" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8"
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8"
-                            },
-                            [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"
-                                },
-                                [
-                                  _c(
-                                    "table",
-                                    {
-                                      staticClass:
-                                        "min-w-full divide-y divide-gray-200"
-                                    },
-                                    [
-                                      _c(
-                                        "thead",
-                                        { staticClass: "bg-gray-50" },
-                                        [
-                                          _c("tr", [
-                                            _c(
-                                              "th",
-                                              {
-                                                staticClass:
-                                                  "px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                                                attrs: { scope: "col" }
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                          Tanggal\n                        "
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "th",
-                                              {
-                                                staticClass:
-                                                  "px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                                                attrs: { scope: "col" }
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                          Penambahan Kasus\n                        "
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "th",
-                                              {
-                                                staticClass:
-                                                  "px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                                                attrs: { scope: "col" }
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                          Dalam Perawatan\n                        "
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "th",
-                                              {
-                                                staticClass:
-                                                  "px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                                                attrs: { scope: "col" }
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                          Penambahan Sembuh\n                        "
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "th",
-                                              {
-                                                staticClass:
-                                                  "px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                                                attrs: { scope: "col" }
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                          Sembuh\n                        "
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "th",
-                                              {
-                                                staticClass:
-                                                  "px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-                                                attrs: { scope: "col" }
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                          Sakit Bukan Covid\n                        "
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "th",
-                                              {
-                                                staticClass:
-                                                  "relative px-6 py-2",
-                                                attrs: { scope: "col" }
-                                              },
-                                              [
-                                                _c(
-                                                  "span",
-                                                  { staticClass: "sr-only" },
-                                                  [_vm._v("Edit")]
-                                                )
-                                              ]
-                                            )
-                                          ])
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "tbody",
-                                        {
-                                          staticClass:
-                                            "bg-white divide-y divide-gray-200"
-                                        },
-                                        [
-                                          _c("tr", [
-                                            _c(
-                                              "td",
-                                              {
-                                                staticClass:
-                                                  "px-6 py-4 whitespace-nowrap"
-                                              },
-                                              [
-                                                _c(
-                                                  "div",
-                                                  {
-                                                    staticClass:
-                                                      "flex items-center"
-                                                  },
-                                                  [
-                                                    _c(
-                                                      "div",
-                                                      {
-                                                        staticClass:
-                                                          "flex-shrink-0 h-10 w-10"
-                                                      },
-                                                      [
-                                                        _c("img", {
-                                                          staticClass:
-                                                            "h-10 w-10 rounded-full",
-                                                          attrs: {
-                                                            src:
-                                                              "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-                                                            alt: ""
-                                                          }
-                                                        })
-                                                      ]
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "div",
-                                                      { staticClass: "ml-4" },
-                                                      [
-                                                        _c(
-                                                          "div",
-                                                          {
-                                                            staticClass:
-                                                              "text-sm font-medium text-gray-900"
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              "\n                                Jane Cooper\n                              "
-                                                            )
-                                                          ]
-                                                        ),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "div",
-                                                          {
-                                                            staticClass:
-                                                              "text-sm text-gray-500"
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              "\n                                jane.cooper@example.com\n                              "
-                                                            )
-                                                          ]
-                                                        )
-                                                      ]
-                                                    )
-                                                  ]
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "td",
-                                              {
-                                                staticClass:
-                                                  "px-6 py-4 whitespace-nowrap"
-                                              },
-                                              [
-                                                _c(
-                                                  "div",
-                                                  {
-                                                    staticClass:
-                                                      "text-sm text-gray-900"
-                                                  },
-                                                  [
-                                                    _vm._v(
-                                                      "\n                            Regional Paradigm Technician\n                          "
-                                                    )
-                                                  ]
-                                                ),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "div",
-                                                  {
-                                                    staticClass:
-                                                      "text-sm text-gray-500"
-                                                  },
-                                                  [
-                                                    _vm._v(
-                                                      "\n                            Optimization\n                          "
-                                                    )
-                                                  ]
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "td",
-                                              {
-                                                staticClass:
-                                                  "px-6 py-4 whitespace-nowrap"
-                                              },
-                                              [
-                                                _c(
-                                                  "div",
-                                                  {
-                                                    staticClass:
-                                                      "text-sm text-gray-900"
-                                                  },
-                                                  [_vm._v("test")]
-                                                ),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "div",
-                                                  {
-                                                    staticClass:
-                                                      "text-sm text-gray-500"
-                                                  },
-                                                  [
-                                                    _vm._v(
-                                                      "\n                            Optimization\n                          "
-                                                    )
-                                                  ]
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "td",
-                                              {
-                                                staticClass:
-                                                  "px-6 py-4 whitespace-nowrap"
-                                              },
-                                              [
-                                                _c(
-                                                  "div",
-                                                  {
-                                                    staticClass:
-                                                      "text-sm text-gray-900"
-                                                  },
-                                                  [_vm._v("test")]
-                                                ),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "div",
-                                                  {
-                                                    staticClass:
-                                                      "text-sm text-gray-500"
-                                                  },
-                                                  [
-                                                    _vm._v(
-                                                      "\n                            Optimization\n                          "
-                                                    )
-                                                  ]
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "td",
-                                              {
-                                                staticClass:
-                                                  "px-6 py-4 whitespace-nowrap"
-                                              },
-                                              [
-                                                _c(
-                                                  "span",
-                                                  {
-                                                    staticClass:
-                                                      "px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
-                                                  },
-                                                  [
-                                                    _vm._v(
-                                                      "\n                            Active\n                          "
-                                                    )
-                                                  ]
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "td",
-                                              {
-                                                staticClass:
-                                                  "px-6 py-4 whitespace-nowrap text-sm text-gray-500"
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                          Admin\n                        "
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "td",
-                                              {
-                                                staticClass:
-                                                  "px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
-                                              },
-                                              [
-                                                _c(
-                                                  "a",
-                                                  {
-                                                    staticClass:
-                                                      "text-indigo-600 hover:text-indigo-900",
-                                                    attrs: { href: "#" }
-                                                  },
-                                                  [_vm._v("Edit")]
-                                                )
-                                              ]
-                                            )
-                                          ])
-                                        ]
-                                      )
-                                    ]
-                                  )
-                                ]
-                              )
-                            ]
-                          )
-                        ]
-                      )
-                    ])
+                    _c(
+                      "div",
+                      { staticClass: "flex flex-col" },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8"
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"
+                                  },
+                                  [
+                                    _c(
+                                      "table",
+                                      {
+                                        staticClass:
+                                          "min-w-full divide-y divide-gray-200"
+                                      },
+                                      [
+                                        _c(
+                                          "thead",
+                                          { staticClass: "bg-gray-50" },
+                                          [
+                                            _c("tr", [
+                                              _c(
+                                                "th",
+                                                {
+                                                  staticClass:
+                                                    "px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                                  attrs: { scope: "col" }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                          Tanggal\n                        "
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "th",
+                                                {
+                                                  staticClass:
+                                                    "px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                                  attrs: { scope: "col" }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                          Penambahan Kasus\n                        "
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "th",
+                                                {
+                                                  staticClass:
+                                                    "px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                                  attrs: { scope: "col" }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                          Dalam Perawatan\n                        "
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "th",
+                                                {
+                                                  staticClass:
+                                                    "px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                                  attrs: { scope: "col" }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                          Penambahan Sembuh\n                        "
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "th",
+                                                {
+                                                  staticClass:
+                                                    "px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                                  attrs: { scope: "col" }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                          Sembuh\n                        "
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "th",
+                                                {
+                                                  staticClass:
+                                                    "px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                                  attrs: { scope: "col" }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                          Meninggal\n                        "
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "th",
+                                                {
+                                                  staticClass:
+                                                    "px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                                  attrs: { scope: "col" }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                          Sakit Bukan Covid\n                        "
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "th",
+                                                {
+                                                  staticClass:
+                                                    "relative px-6 py-2",
+                                                  attrs: { scope: "col" }
+                                                },
+                                                [
+                                                  _c(
+                                                    "span",
+                                                    { staticClass: "sr-only" },
+                                                    [_vm._v("Edit")]
+                                                  )
+                                                ]
+                                              )
+                                            ])
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "tbody",
+                                          {
+                                            staticClass:
+                                              "bg-white divide-y divide-gray-200"
+                                          },
+                                          _vm._l(_vm.dataCovids, function(x) {
+                                            return _c("tr", { key: x.id }, [
+                                              _c(
+                                                "td",
+                                                {
+                                                  staticClass:
+                                                    "px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                          " +
+                                                      _vm._s(x.tanggal) +
+                                                      "\n                        "
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                {
+                                                  staticClass:
+                                                    "px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                          " +
+                                                      _vm._s(
+                                                        x.penambahan_kasus
+                                                      ) +
+                                                      "\n                        "
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                {
+                                                  staticClass:
+                                                    "px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                          " +
+                                                      _vm._s(
+                                                        x.dalam_perawatan
+                                                      ) +
+                                                      "\n                        "
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                {
+                                                  staticClass:
+                                                    "px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                          " +
+                                                      _vm._s(
+                                                        x.penambahan_sembuh
+                                                      ) +
+                                                      "\n                        "
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                {
+                                                  staticClass:
+                                                    "px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                          " +
+                                                      _vm._s(x.sembuh) +
+                                                      "\n                        "
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                {
+                                                  staticClass:
+                                                    "px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                          " +
+                                                      _vm._s(x.meninggal) +
+                                                      "\n                        "
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                {
+                                                  staticClass:
+                                                    "px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                          " +
+                                                      _vm._s(
+                                                        x.sakit_bukan_covid
+                                                      ) +
+                                                      "\n                        "
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                {
+                                                  staticClass:
+                                                    "px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                                                },
+                                                [
+                                                  _c(
+                                                    "a",
+                                                    {
+                                                      staticClass:
+                                                        "text-indigo-600 hover:text-indigo-900",
+                                                      attrs: { href: "#" }
+                                                    },
+                                                    [_vm._v("Edit")]
+                                                  )
+                                                ]
+                                              )
+                                            ])
+                                          }),
+                                          0
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("pagination", {
+                          attrs: { pagination: _vm.pagination, offset: 4 },
+                          on: { paginate: _vm.getDataCovids }
+                        })
+                      ],
+                      1
+                    )
                   ]
                 )
               ])
@@ -73825,6 +74214,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Layouts/Pagination2.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/Layouts/Pagination2.vue ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Pagination2_vue_vue_type_template_id_3e1d19f8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Pagination2.vue?vue&type=template&id=3e1d19f8& */ "./resources/js/Layouts/Pagination2.vue?vue&type=template&id=3e1d19f8&");
+/* harmony import */ var _Pagination2_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Pagination2.vue?vue&type=script&lang=js& */ "./resources/js/Layouts/Pagination2.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Pagination2_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Pagination2_vue_vue_type_template_id_3e1d19f8___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Pagination2_vue_vue_type_template_id_3e1d19f8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Layouts/Pagination2.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Layouts/Pagination2.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/Layouts/Pagination2.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Pagination2_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Pagination2.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Layouts/Pagination2.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Pagination2_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Layouts/Pagination2.vue?vue&type=template&id=3e1d19f8&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/Layouts/Pagination2.vue?vue&type=template&id=3e1d19f8& ***!
+  \*****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Pagination2_vue_vue_type_template_id_3e1d19f8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Pagination2.vue?vue&type=template&id=3e1d19f8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Layouts/Pagination2.vue?vue&type=template&id=3e1d19f8&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Pagination2_vue_vue_type_template_id_3e1d19f8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Pagination2_vue_vue_type_template_id_3e1d19f8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/Pages sync recursive ^\\.\\/.*$":
 /*!******************************************!*\
   !*** ./resources/js/Pages sync ^\.\/.*$ ***!
@@ -74609,6 +75067,7 @@ window.Toast = Swal.mixin({
   timer: 3000,
   timerProgressBar: true
 });
+window.Fire = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
 var app = document.getElementById('app');
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   render: function render(h) {
