@@ -6,7 +6,7 @@
             <h2
             class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate"
             >
-            Data Covid
+            Master Data User
             </h2>
         </div>
         <div class="mt-5 flex lg:mt-0 lg:ml-4">
@@ -32,7 +32,7 @@
                     clip-rule="evenodd"
                 />
                 </svg>
-                Tambah Data
+                Tambah Master Data
             </button>
             </span>
         </div>
@@ -64,136 +64,134 @@
             <form>
               <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div class="">
+
                   <div class="mb-4">
-                    <!-- <input type="hidden" v-model="form._token" name="_token" :value="csrf"> -->
                     <label
                       for="formControlInput1"
                       class="block text-gray-700 text-sm font-bold mb-2"
-                      >Tanggal:</label
+                      >Nama:</label
                     >
-                    <date-picker id="formControlInput1" class="shadow" v-model="form.date" valueType="format"></date-picker>
-                    <!-- <input
+
+                    <input
                       type="text"
                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                       id="formControlInput1"
-                      placeholder="Enter Tanggal"
-                      v-model="form.tanggal"
-                    /> -->
-
-                    <div v-if="errors.date != null" class="text-red-500">
-                      {{ errors.date }}
+                      placeholder="Enter Nama"
+                      v-model="form.nama"
+                    />
+                    <div v-if="errors.nama != null" class="text-red-500">
+                      {{ errors.nama }}
                     </div>
                   </div>
+                  <div class="mb-4">
+                    <label
+                      for="formControlInput3"
+                      class="block text-gray-700 text-sm font-bold mb-2"
+                      >Username:</label
+                    >
 
+                    <input
+                      type="text"
+                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      id="formControlInput3"
+                      placeholder="Enter Username"
+                      v-model="form.username"
+                    />
+                    <div v-if="errors.username != null" class="text-red-500">
+                      {{ errors.username }}
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <label
+                      for="formControlInput3"
+                      class="block text-gray-700 text-sm font-bold mb-2"
+                      >Email:</label
+                    >
+
+                    <input
+                      type="email"
+                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      id="formControlInput3"
+                      placeholder="Enter Email"
+                      v-model="form.email"
+                    />
+                    <div v-if="errors.email != null" class="text-red-500">
+                      {{ errors.email }}
+                    </div>
+                  </div>
                   <div class="mb-4">
                     <label
                       for="formControlInput2"
                       class="block text-gray-700 text-sm font-bold mb-2"
-                      >Penambahan Kasus:</label
+                      >Password:</label
                     >
 
                     <input
-                      type="number"
+                      type="password"
                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                       id="formControlInput2"
                       placeholder="Enter Penambahan Kasus"
-                      v-model="form.penambahanKasus"
+                      v-model="form.password"
                     />
-                    <div v-if="errors.penambahanKasus != null" class="text-red-500">
-                      {{ errors.penambahanKasus }}
-                    </div>
-                  </div>
-
-                  <div class="mb-4">
-                      <label
-                      for="formControlInput3"
-                      class="block text-gray-700 text-sm font-bold mb-2"
-                      >Dalam Perawatan :</label
-                    >
-
-                    <input
-                      type="number"
-                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="formControlInput3"
-                      placeholder="Enter Dalam Perawatan"
-                      v-model="form.dalamPerawatan"
-                    />
-                    <div v-if="errors.dalamPerawatan" class="text-red-500">
-                      {{ errors.dalamPerawatan }}
+                    <div v-if="errors.password != null" class="text-red-500">
+                      {{ errors.password }}
                     </div>
                   </div>
                   <div class="mb-4">
-                      <label
-                      for="formControlInput4"
+                    <label
+                      for="formControlInput1"
                       class="block text-gray-700 text-sm font-bold mb-2"
-                      >Penambahan Sembuh :</label
+                      >Tipe Akun:</label
                     >
 
-                    <input
-                      type="number"
-                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="formControlInput4"
-                      placeholder="Enter Penambahan Sembuh"
-                      v-model="form.penambahanSembuh"
-                    />
-                    <div v-if="errors.penambahanSembuh" class="text-red-500">
-                      {{ errors.penambahanSembuh }}
+                    <div class="col-span-6 sm:col-span-3">
+                      <select v-model="form.tipeAkun" id="tipe_akun" name="tipeAkun" placeholder="Please select one" class="shadow border rounded w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option disabled value="">Please select one</option>
+                        <option v-for="option in tipeAkun" v-bind:value="option.id">
+                          {{ option.tipe_akun }}
+                        </option>
+                      </select>
                     </div>
-                  </div>
-
-                  <div class="mb-4">
-                      <label
-                      for="formControlInput5"
-                      class="block text-gray-700 text-sm font-bold mb-2"
-                      >Sembuh :</label
-                    >
-
-                    <input
-                      type="number"
-                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="formControlInput5"
-                      placeholder="Enter Sembuh"
-                      v-model="form.sembuh"
-                    />
-                    <div v-if="errors.sembuh" class="text-red-500">
-                      {{ errors.sembuh }}
-                    </div>
-                  </div>
-
-                  <div class="mb-4">
-                      <label
-                      for="formControlInput6"
-                      class="block text-gray-700 text-sm font-bold mb-2"
-                      >Meninggal :</label
-                    >
-
-                    <input
-                      type="number"
-                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="formControlInput6"
-                      placeholder="Enter Meninggal"
-                      v-model="form.meninggal"
-                    />
-                    <div v-if="errors.meninggal" class="text-red-500">
-                      {{ errors.meninggal }}
+                    <div v-if="errors.tipeAkun != null" class="text-red-500">
+                      {{ errors.tipeAkun }}
                     </div>
                   </div>
                   <div class="mb-4">
-                      <label
-                      for="formControlInput7"
+                    <label
+                      for="formControlInput1"
                       class="block text-gray-700 text-sm font-bold mb-2"
-                      >Sakit Bukan Covid :</label
+                      >Wilayah Kerja:</label
                     >
 
-                    <input
-                      type="number"
-                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="formControlInput7"
-                      placeholder="Enter Sakit Bukan Covid"
-                      v-model="form.sakitBukanCovid"
-                    />
-                    <div v-if="errors.sakitBukanCovid" class="text-red-500">
-                      {{ errors.sakitBukanCovid }}
+                    <div class="col-span-6 sm:col-span-3">
+                      <select v-model="form.idWilayah" @change="getMasterUnit($event)" id="tipe_akun" name="tipeAkun" placeholder="Please select one" class="shadow border rounded w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option disabled value="">Please select one</option>
+                        <option v-for="option in idWilayah" v-bind:value="option.id">
+                          {{ option.nama_wilayah }}
+                        </option>
+                      </select>
+                    </div>
+                    <div v-if="errors.idWilayah != null" class="text-red-500">
+                      {{ errors.idWilayah }}
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <label
+                      for="formControlInput1"
+                      class="block text-gray-700 text-sm font-bold mb-2"
+                      >Unit:</label
+                    >
+
+                    <div class="col-span-6 sm:col-span-3">
+                      <select v-model="form.idUnit" id="unit" name="unit" placeholder="Please select one" class="mt-1 shadow border rounded w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option disabled value="">Please select one</option>
+                        <option v-for="option in idUnit" v-bind:value="option.id">
+                          {{ option.unit }}
+                        </option>
+                      </select>
+                    </div>
+                    <div v-if="errors.idWilayah != null" class="text-red-500">
+                      {{ errors.idUnit }}
                     </div>
                   </div>
                 </div>
@@ -272,86 +270,136 @@ import 'vue2-datepicker/index.css';
 
                 isOpen: false,
 
-                // csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-
-                // _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-
                 form: {
 
-                    dalamPerawatan: null,
+                    nama: null,
 
-                    penambahanKasus: null,
+                    username: null,
 
-                    date: null,
+                    email: null,
 
-                    penambahanSembuh: null,
+                    password: null,
 
-                    sembuh: null,
+                    tipeAkun: null,
 
-                    meninggal: null,
+                    idWilayah: null,
 
-                    sakitBukanCovid: null,
+                    idUnit: null,
 
-                    _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 
                 },
-
+                tipeAkun: {},
+                idWilayah: {},
+                idUnit: {}
             }
 
         },
-            methods: {
+        methods: {
 
-            openModal: function () {
-                console.log("masuk");
-                this.isOpen = true;
-            },
+          openModal: function () {
+              this.isOpen = true;
+          },
 
-            closeModal: function () {
+          closeModal: function () {
 
-                this.isOpen = false;
+              this.isOpen = false;
 
-                this.reset();
+              this.reset();
 
-                this.editMode=false;
+              this.editMode=false;
 
-            },
+          },
 
-            reset: function () {
+          reset: function () {
 
-                this.form = {
+              this.form = {
 
-                    title: null,
+                  nama: null,
 
-                    body: null,
+                  email: null,
 
-                }
+                  username: null,
 
-            },
+                  password: null,
 
-            async save(data) {
+                  tipeAkun: null,
 
-              try {
-              const res = await axios.post('api/datacovid', data);
-              if(res.status === 201){
-                Toast.fire({
-                  icon:'success',
-                  title: res.data
-                })
-                this.dataVersion += 1;
-                window.location.href = 'data-covid';
-                this.closeModal();
-                } 
+                  idWilayah: null,
+
+                  idUnit: null,
+
               }
-              catch(err){
-                  // console.log(err);
-                this.errors = err.response.data.errors;
-                console.log(this.errors.dalamPerawatan);
-                Toast.fire({
-                  icon:'error'
-                })
-              }
-            },
-    }
-    }
+
+          },
+
+          async getMasterDataTipeAkun(){
+            try {
+              this.loading = true;
+              const res = await axios.get('api/data-tipe-akun');
+              console.log(res.data.data);
+              this.tipeAkun = res.data;
+              this.loading = false;
+            }
+            catch(err){
+              console.log(err);
+              this.loading = false;
+            }
+          },
+
+          async getMasterDataWilayahAkun(){
+            try {
+              this.loading = true;
+              const res = await axios.get('api/datawilayah');
+              // console.log(res.data.data);
+              this.idWilayah = res.data.data;
+              this.loading = false;
+            }
+            catch(err){
+            console.log(err);
+            this.loading = false;
+            }
+          },
+
+          async getMasterUnit(event){
+            const id = event.target.value;
+            try {
+              const res = await axios.get('api/datapusat/get-unit/'+id);
+              // console.log(res.data.data);
+              this.idUnit = res.data;
+            }
+            catch(err){
+            console.log(err);
+            }
+          },
+
+          async save(data) {
+
+            try {
+            const res = await axios.post('api/datauser', data);
+            if(res.status === 201){
+              setTimeout(() => { Toast.fire({
+                icon:'success',
+                title: res.data
+              }) }, 2000);
+              this.dataVersion += 1;
+              window.location.href = 'master-user';
+              this.closeModal();
+              } 
+            }
+            catch(err){
+                // console.log(err);
+              this.errors = err.response.data.errors;
+              Toast.fire({
+                icon:'error'
+              })
+            }
+          },
+        },
+        created(){
+          this.getMasterDataTipeAkun();
+          this.getMasterDataWilayahAkun();
+        }   
+      }
     
 </script>

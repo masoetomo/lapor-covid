@@ -21,7 +21,7 @@ class DataCovidController extends Controller
     public function index()
     {
         $value = Auth::id();
-        $data = Data_covid::where('id_user', $value)->paginate(5);
+        $data = Data_covid::where('id_user', $value)->orderBy('tanggal','desc')->paginate(5);
         return $data;
         // return response()->json(
         //     new DataCovidCollection($data)
@@ -114,8 +114,6 @@ class DataCovidController extends Controller
             'meninggal'=>'required',
             'sakitBukanCovid'=>'required'
         ]);
-        // $value = Auth::id();
-        $value = $request->session()->get('id');
 
         // var_dump($value);
         $dataCovid = Data_covid::find($id);
@@ -126,7 +124,6 @@ class DataCovidController extends Controller
         $dataCovid->sembuh = $request->sembuh;
         $dataCovid->meninggal = $request->meninggal;
         $dataCovid->sakit_bukan_covid = $request->sakitBukanCovid;
-        $dataCovid->id_user = $value;
 
         $dataCovid->save();
         // return response($value,201);

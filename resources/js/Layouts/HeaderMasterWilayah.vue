@@ -6,7 +6,7 @@
             <h2
             class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate"
             >
-            Data Covid
+            Master Data Wilayah
             </h2>
         </div>
         <div class="mt-5 flex lg:mt-0 lg:ml-4">
@@ -32,7 +32,7 @@
                     clip-rule="evenodd"
                 />
                 </svg>
-                Tambah Data
+                Tambah Master Data
             </button>
             </span>
         </div>
@@ -64,136 +64,23 @@
             <form>
               <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div class="">
-                  <div class="mb-4">
-                    <!-- <input type="hidden" v-model="form._token" name="_token" :value="csrf"> -->
-                    <label
-                      for="formControlInput1"
-                      class="block text-gray-700 text-sm font-bold mb-2"
-                      >Tanggal:</label
-                    >
-                    <date-picker id="formControlInput1" class="shadow" v-model="form.date" valueType="format"></date-picker>
-                    <!-- <input
-                      type="text"
-                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="formControlInput1"
-                      placeholder="Enter Tanggal"
-                      v-model="form.tanggal"
-                    /> -->
-
-                    <div v-if="errors.date != null" class="text-red-500">
-                      {{ errors.date }}
-                    </div>
-                  </div>
 
                   <div class="mb-4">
                     <label
                       for="formControlInput2"
                       class="block text-gray-700 text-sm font-bold mb-2"
-                      >Penambahan Kasus:</label
+                      >Nama Wilayah:</label
                     >
 
                     <input
-                      type="number"
+                      type="text"
                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                       id="formControlInput2"
                       placeholder="Enter Penambahan Kasus"
-                      v-model="form.penambahanKasus"
+                      v-model="form.namaWilayah"
                     />
-                    <div v-if="errors.penambahanKasus != null" class="text-red-500">
-                      {{ errors.penambahanKasus }}
-                    </div>
-                  </div>
-
-                  <div class="mb-4">
-                      <label
-                      for="formControlInput3"
-                      class="block text-gray-700 text-sm font-bold mb-2"
-                      >Dalam Perawatan :</label
-                    >
-
-                    <input
-                      type="number"
-                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="formControlInput3"
-                      placeholder="Enter Dalam Perawatan"
-                      v-model="form.dalamPerawatan"
-                    />
-                    <div v-if="errors.dalamPerawatan" class="text-red-500">
-                      {{ errors.dalamPerawatan }}
-                    </div>
-                  </div>
-                  <div class="mb-4">
-                      <label
-                      for="formControlInput4"
-                      class="block text-gray-700 text-sm font-bold mb-2"
-                      >Penambahan Sembuh :</label
-                    >
-
-                    <input
-                      type="number"
-                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="formControlInput4"
-                      placeholder="Enter Penambahan Sembuh"
-                      v-model="form.penambahanSembuh"
-                    />
-                    <div v-if="errors.penambahanSembuh" class="text-red-500">
-                      {{ errors.penambahanSembuh }}
-                    </div>
-                  </div>
-
-                  <div class="mb-4">
-                      <label
-                      for="formControlInput5"
-                      class="block text-gray-700 text-sm font-bold mb-2"
-                      >Sembuh :</label
-                    >
-
-                    <input
-                      type="number"
-                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="formControlInput5"
-                      placeholder="Enter Sembuh"
-                      v-model="form.sembuh"
-                    />
-                    <div v-if="errors.sembuh" class="text-red-500">
-                      {{ errors.sembuh }}
-                    </div>
-                  </div>
-
-                  <div class="mb-4">
-                      <label
-                      for="formControlInput6"
-                      class="block text-gray-700 text-sm font-bold mb-2"
-                      >Meninggal :</label
-                    >
-
-                    <input
-                      type="number"
-                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="formControlInput6"
-                      placeholder="Enter Meninggal"
-                      v-model="form.meninggal"
-                    />
-                    <div v-if="errors.meninggal" class="text-red-500">
-                      {{ errors.meninggal }}
-                    </div>
-                  </div>
-                  <div class="mb-4">
-                      <label
-                      for="formControlInput7"
-                      class="block text-gray-700 text-sm font-bold mb-2"
-                      >Sakit Bukan Covid :</label
-                    >
-
-                    <input
-                      type="number"
-                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="formControlInput7"
-                      placeholder="Enter Sakit Bukan Covid"
-                      v-model="form.sakitBukanCovid"
-                    />
-                    <div v-if="errors.sakitBukanCovid" class="text-red-500">
-                      {{ errors.sakitBukanCovid }}
+                    <div v-if="errors.namaWilayah != null" class="text-red-500">
+                      {{ errors.namaWilayah }}
                     </div>
                   </div>
                 </div>
@@ -272,27 +159,11 @@ import 'vue2-datepicker/index.css';
 
                 isOpen: false,
 
-                // csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-
-                // _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-
                 form: {
 
-                    dalamPerawatan: null,
+                    namaWilayah: null,
 
-                    penambahanKasus: null,
-
-                    date: null,
-
-                    penambahanSembuh: null,
-
-                    sembuh: null,
-
-                    meninggal: null,
-
-                    sakitBukanCovid: null,
-
-                    _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 
                 },
 
@@ -302,7 +173,6 @@ import 'vue2-datepicker/index.css';
             methods: {
 
             openModal: function () {
-                console.log("masuk");
                 this.isOpen = true;
             },
 
@@ -320,9 +190,7 @@ import 'vue2-datepicker/index.css';
 
                 this.form = {
 
-                    title: null,
-
-                    body: null,
+                    namaWilayah: null,
 
                 }
 
@@ -331,21 +199,20 @@ import 'vue2-datepicker/index.css';
             async save(data) {
 
               try {
-              const res = await axios.post('api/datacovid', data);
+              const res = await axios.post('api/datawilayah', data);
               if(res.status === 201){
-                Toast.fire({
+                setTimeout(() => { Toast.fire({
                   icon:'success',
                   title: res.data
-                })
+                }) }, 2000);
                 this.dataVersion += 1;
-                window.location.href = 'data-covid';
+                window.location.href = 'master-wilayah';
                 this.closeModal();
                 } 
               }
               catch(err){
                   // console.log(err);
                 this.errors = err.response.data.errors;
-                console.log(this.errors.dalamPerawatan);
                 Toast.fire({
                   icon:'error'
                 })
