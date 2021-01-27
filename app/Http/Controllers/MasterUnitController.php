@@ -41,6 +41,7 @@ class MasterUnitController extends Controller
             'deputi'=>'required',
             'unit'=>'required',
             'jumlahPegawai'=>'required',
+            'idWilayah'=>'required',
 
         ]);
 
@@ -48,6 +49,7 @@ class MasterUnitController extends Controller
         $masterPusat->deputi = $request->deputi;
         $masterPusat->unit = $request->unit;
         $masterPusat->jumlah_pegawai = $request->jumlahPegawai;
+        $masterPusat->id_wilayah = $request->idWilayah;
         $masterPusat->save();
         // return response($value,201);
         return response('Successfully Created a new Master Pusat', 201);
@@ -88,12 +90,14 @@ class MasterUnitController extends Controller
             'deputi'=>'required',
             'unit'=>'required',
             'jumlahPegawai'=>'required',
+            'idWilayah'=>'required',
         ]);
 
         $masterPusat = Master_unit::find($id);
         $masterPusat->deputi = $request->deputi;
         $masterPusat->unit = $request->unit;
         $masterPusat->jumlah_pegawai = $request->jumlahPegawai;
+        $masterPusat->id_wilayah = $request->idWilayah;
         $masterPusat->save();
         // return response($value,201);
         return response('Successfully Updated a Master Pusat', 200);

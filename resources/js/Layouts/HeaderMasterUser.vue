@@ -266,6 +266,8 @@ import 'vue2-datepicker/index.css';
 
                 errors: [],
 
+                loading: false,
+
                 editMode: false,
 
                 isOpen: false,

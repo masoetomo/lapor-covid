@@ -69,16 +69,24 @@
                     <label
                       for="formControlInput1"
                       class="block text-gray-700 text-sm font-bold mb-2"
-                      >Deputi:</label
+                      >Deputi/Tipe Balai/Loka:</label
                     >
 
-                    <input
-                      type="text"
-                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="formControlInput1"
-                      placeholder="Enter Nama Deputi"
-                      v-model="form.deputi"
-                    />
+                    <div class="col-span-6 sm:col-span-3">
+                      <select v-model="form.deputi" id="tipe_akun" name="tipeAkun" placeholder="Please select one" class="shadow border rounded w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option disabled value="">Please select one</option>
+                        <option value="Deputi 1">Deputi 1</option>
+                        <option value="Deputi 2">Deputi 2</option>
+                        <option value="Deputi 3">Deputi 3</option>
+                        <option value="Deputi 4">Deputi 4</option>
+                        <option value="Pusat-Pusat">Pusat-Pusat</option>
+                        <option value="Sestama">Sestama</option>
+                        <option value="Inspektorat">Inspektorat</option>
+                        <option value="Balai Besar">Balai Besar</option>
+                        <option value="Balai">Balai</option>
+                        <option value="Loka">Loka</option>
+                      </select>
+                    </div>
                     <div v-if="errors.deputi != null" class="text-red-500">
                       {{ errors.deputi }}
                     </div>
@@ -117,6 +125,25 @@
                     />
                     <div v-if="errors.jumlahPegawai != null" class="text-red-500">
                       {{ errors.jumlahPegawai }}
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <label
+                      for="formControlInput1"
+                      class="block text-gray-700 text-sm font-bold mb-2"
+                      >Wilayah Kerja:</label
+                    >
+
+                    <div class="col-span-6 sm:col-span-3">
+                      <select v-model="form.idWilayah" id="tipe_akun" name="tipeAkun" placeholder="Please select one" class="shadow border rounded w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option disabled value="">Please select one</option>
+                        <option v-for="option in idWilayah" v-bind:value="option.id">
+                          {{ option.nama_wilayah }}
+                        </option>
+                      </select>
+                    </div>
+                    <div v-if="errors.idWilayah != null" class="text-red-500">
+                      {{ errors.idWilayah }}
                     </div>
                   </div>
                 </div>
@@ -203,14 +230,17 @@ import 'vue2-datepicker/index.css';
 
                     jumlahPegawai: null,
 
+                    idWilayah: null,
+
                     _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 
                 },
 
+                idWilayah: {},
             }
 
         },
-            methods: {
+        methods: {
 
             openModal: function () {
                 this.isOpen = true;
@@ -234,24 +264,40 @@ import 'vue2-datepicker/index.css';
 
                     unit: null,
 
+                    idWilayah: null,
+
                     jumlahPegawai: null,
 
                 }
 
             },
 
+            async getMasterDataWilayahAkun(){
+              try {
+                this.loading = true;
+                const res = await axios.get('api/datawilayah');
+                console.log(res.data.data);
+                this.idWilayah = res.data.data;
+                this.loading = false;
+              }
+              catch(err){
+              console.log(err);
+              this.loading = false;
+              }
+            },
+
             async save(data) {
 
               try {
-              const res = await axios.post('api/datapusat', data);
-              if(res.status === 201){
-                setTimeout(() => { Toast.fire({
-                  icon:'success',
-                  title: res.data
-                }) }, 2000);
-                this.dataVersion += 1;
-                window.location.href = 'master-pusat';
-                this.closeModal();
+                const res = await axios.post('api/datapusat', data);
+                if(res.status === 201){
+                  setTimeout(() => { Toast.fire({
+                    icon:'success',
+                    title: res.data
+                  }) }, 2000);
+                  this.dataVersion += 1;
+                  window.location.href = 'master-pusat';
+                  this.closeModal();
                 } 
               }
               catch(err){
@@ -262,7 +308,10 @@ import 'vue2-datepicker/index.css';
                 })
               }
             },
-    }
+        },
+        created(){
+          this.getMasterDataWilayahAkun();
+        }
     }
     
 </script>

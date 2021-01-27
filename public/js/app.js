@@ -4257,6 +4257,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  // import datepicker from '../../../node_modules/js-datepicker'
 
 
@@ -4276,8 +4303,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         deputi: null,
         unit: null,
         jumlahPegawai: null,
+        idWilayah: null,
         _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-      }
+      },
+      idWilayah: {}
     };
   },
   methods: {
@@ -4293,10 +4322,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.form = {
         deputi: null,
         unit: null,
+        idWilayah: null,
         jumlahPegawai: null
       };
     },
-    save: function save(data) {
+    getMasterDataWilayahAkun: function getMasterDataWilayahAkun() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -4306,11 +4336,47 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                _context.next = 3;
+                _this.loading = true;
+                _context.next = 4;
+                return axios.get('api/datawilayah');
+
+              case 4:
+                res = _context.sent;
+                console.log(res.data.data);
+                _this.idWilayah = res.data.data;
+                _this.loading = false;
+                _context.next = 14;
+                break;
+
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](0);
+                console.log(_context.t0);
+                _this.loading = false;
+
+              case 14:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 10]]);
+      }))();
+    },
+    save: function save(data) {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
                 return axios.post('api/datapusat', data);
 
               case 3:
-                res = _context.sent;
+                res = _context2.sent;
 
                 if (res.status === 201) {
                   setTimeout(function () {
@@ -4319,32 +4385,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       title: res.data
                     });
                   }, 2000);
-                  _this.dataVersion += 1;
+                  _this2.dataVersion += 1;
                   window.location.href = 'master-pusat';
 
-                  _this.closeModal();
+                  _this2.closeModal();
                 }
 
-                _context.next = 11;
+                _context2.next = 11;
                 break;
 
               case 7:
-                _context.prev = 7;
-                _context.t0 = _context["catch"](0);
+                _context2.prev = 7;
+                _context2.t0 = _context2["catch"](0);
                 // console.log(err);
-                _this.errors = _context.t0.response.data.errors;
+                _this2.errors = _context2.t0.response.data.errors;
                 Toast.fire({
                   icon: 'error'
                 });
 
               case 11:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, null, [[0, 7]]);
+        }, _callee2, null, [[0, 7]]);
       }))();
     }
+  },
+  created: function created() {
+    this.getMasterDataWilayahAkun();
   }
 });
 
@@ -4633,6 +4702,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       errors: [],
+      loading: false,
       editMode: false,
       isOpen: false,
       form: {
@@ -7387,6 +7457,49 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -7415,9 +7528,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         deputi: null,
         unit: null,
         jumlahPegawai: null,
+        idWilayah: null,
         id: null,
         _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
       },
+      idWilayah: {},
       DataMasters: []
     };
   },
@@ -7437,6 +7552,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         deputi: null,
         unit: null,
         jumlahPegawai: null,
+        idWilayah: null,
         id: null
       };
     },
@@ -7574,7 +7690,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3, null, [[0, 7]]);
       }))();
     },
-    showDataMaster: function showDataMaster(id) {
+    getMasterDataWilayahAkun: function getMasterDataWilayahAkun() {
       var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
@@ -7584,35 +7700,73 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context4.prev = _context4.next) {
               case 0:
                 _context4.prev = 0;
-                _context4.next = 3;
-                return axios.get('api/datapusat/' + id);
+                _this4.loading = true;
+                _context4.next = 4;
+                return axios.get('api/datawilayah');
 
-              case 3:
+              case 4:
                 res = _context4.sent;
-                // console.log(res.data.tanggal);
-                _this4.form.deputi = res.data.deputi;
-                _this4.form.unit = res.data.unit;
-                _this4.form.jumlahPegawai = res.data.jumlah_pegawai;
-                _this4.form.id = id;
-                _context4.next = 13;
+                console.log(res.data.data);
+                _this4.idWilayah = res.data.data;
+                _this4.loading = false;
+                _context4.next = 14;
                 break;
 
               case 10:
                 _context4.prev = 10;
                 _context4.t0 = _context4["catch"](0);
                 console.log(_context4.t0);
+                _this4.loading = false;
 
-              case 13:
+              case 14:
               case "end":
                 return _context4.stop();
             }
           }
         }, _callee4, null, [[0, 10]]);
       }))();
+    },
+    showDataMaster: function showDataMaster(id) {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.prev = 0;
+                _context5.next = 3;
+                return axios.get('api/datapusat/' + id);
+
+              case 3:
+                res = _context5.sent;
+                // console.log(res.data.tanggal);
+                _this5.form.deputi = res.data.deputi;
+                _this5.form.unit = res.data.unit;
+                _this5.form.jumlahPegawai = res.data.jumlah_pegawai;
+                _this5.form.idWilayah = res.data.id_wilayah;
+                _this5.form.id = id;
+                _context5.next = 14;
+                break;
+
+              case 11:
+                _context5.prev = 11;
+                _context5.t0 = _context5["catch"](0);
+                console.log(_context5.t0);
+
+              case 14:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, null, [[0, 11]]);
+      }))();
     }
   },
   created: function created() {
     this.getMasterData();
+    this.getMasterDataWilayahAkun();
   }
 });
 
@@ -57300,158 +57454,154 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "hidden space-x-8 sm:-my-px sm:ml-10 sm:flex sm:items-center"
-                },
-                [
-                  _c("jet-dropdown", {
-                    attrs: { align: "right", width: "48" },
-                    scopedSlots: _vm._u([
-                      {
-                        key: "trigger",
-                        fn: function() {
-                          return [
-                            _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
-                              },
-                              [
-                                _c("div", [_vm._v("Master Data")]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "ml-1" }, [
+              _vm.$page.user.tipe_akun === 1
+                ? _c(
+                    "div",
+                    {
+                      staticClass:
+                        "hidden space-x-8 sm:-my-px sm:ml-10 sm:flex sm:items-center"
+                    },
+                    [
+                      _c("jet-dropdown", {
+                        attrs: { align: "right", width: "48" },
+                        scopedSlots: _vm._u(
+                          [
+                            {
+                              key: "trigger",
+                              fn: function() {
+                                return [
                                   _c(
-                                    "svg",
+                                    "button",
                                     {
-                                      staticClass: "fill-current h-4 w-4",
+                                      staticClass:
+                                        "flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
+                                    },
+                                    [
+                                      _c("div", [_vm._v("Master Data")]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "ml-1" }, [
+                                        _c(
+                                          "svg",
+                                          {
+                                            staticClass: "fill-current h-4 w-4",
+                                            attrs: {
+                                              xmlns:
+                                                "http://www.w3.org/2000/svg",
+                                              viewBox: "0 0 20 20"
+                                            }
+                                          },
+                                          [
+                                            _c("path", {
+                                              attrs: {
+                                                "fill-rule": "evenodd",
+                                                d:
+                                                  "M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z",
+                                                "clip-rule": "evenodd"
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      ])
+                                    ]
+                                  )
+                                ]
+                              },
+                              proxy: true
+                            },
+                            {
+                              key: "content",
+                              fn: function() {
+                                return [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "block px-4 py-2 text-xs text-gray-400"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Master User\n                                "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "jet-dropdown-link",
+                                    {
+                                      attrs: { href: _vm.route("master-user") }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Master User\n                                "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "block px-4 py-2 text-xs text-gray-400"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Master Wilayah\n                                "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "jet-dropdown-link",
+                                    {
                                       attrs: {
-                                        xmlns: "http://www.w3.org/2000/svg",
-                                        viewBox: "0 0 20 20"
+                                        href: _vm.route("master-wilayah")
                                       }
                                     },
                                     [
-                                      _c("path", {
-                                        attrs: {
-                                          "fill-rule": "evenodd",
-                                          d:
-                                            "M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z",
-                                          "clip-rule": "evenodd"
-                                        }
-                                      })
+                                      _vm._v(
+                                        "\n                                    Master Data Wilayah Kerja\n                                "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "block px-4 py-2 text-xs text-gray-400"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Master UPT\n                                "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "jet-dropdown-link",
+                                    {
+                                      attrs: { href: _vm.route("master-pusat") }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Master Data Unit\n                                "
+                                      )
                                     ]
                                   )
-                                ])
-                              ]
-                            )
-                          ]
-                        },
-                        proxy: true
-                      },
-                      {
-                        key: "content",
-                        fn: function() {
-                          return [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "block px-4 py-2 text-xs text-gray-400"
+                                ]
                               },
-                              [
-                                _vm._v(
-                                  "\n                                    Master User\n                                "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "jet-dropdown-link",
-                              { attrs: { href: _vm.route("master-user") } },
-                              [
-                                _vm._v(
-                                  "\n                                    Master User\n                                "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "block px-4 py-2 text-xs text-gray-400"
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                    Master Wilayah\n                                "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "jet-dropdown-link",
-                              { attrs: { href: _vm.route("master-wilayah") } },
-                              [
-                                _vm._v(
-                                  "\n                                    Master Data Wilayah Kerja\n                                "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "block px-4 py-2 text-xs text-gray-400"
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                    Master UPT\n                                "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "jet-dropdown-link",
-                              { attrs: { href: _vm.route("master-pusat") } },
-                              [
-                                _vm._v(
-                                  "\n                                    Master Data Pusat\n                                "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "jet-dropdown-link",
-                              { attrs: { href: _vm.route("master-balai") } },
-                              [
-                                _vm._v(
-                                  "\n                                    Master Data Balai\n                                "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "jet-dropdown-link",
-                              { attrs: { href: _vm.route("master-loka") } },
-                              [
-                                _vm._v(
-                                  "\n                                    Master Data Loka\n                                "
-                                )
-                              ]
-                            )
-                          ]
-                        },
-                        proxy: true
-                      }
-                    ])
-                  })
-                ],
-                1
-              )
+                              proxy: true
+                            }
+                          ],
+                          null,
+                          false,
+                          4232184910
+                        )
+                      })
+                    ],
+                    1
+                  )
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c(
@@ -59608,39 +59758,127 @@ var render = function() {
                                     "block text-gray-700 text-sm font-bold mb-2",
                                   attrs: { for: "formControlInput1" }
                                 },
-                                [_vm._v("Deputi:")]
+                                [_vm._v("Deputi/Tipe Balai/Loka:")]
                               ),
                               _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.form.deputi,
-                                    expression: "form.deputi"
-                                  }
-                                ],
-                                staticClass:
-                                  "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
-                                attrs: {
-                                  type: "text",
-                                  id: "formControlInput1",
-                                  placeholder: "Enter Nama Deputi"
-                                },
-                                domProps: { value: _vm.form.deputi },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.form,
-                                      "deputi",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              }),
+                              _c(
+                                "div",
+                                { staticClass: "col-span-6 sm:col-span-3" },
+                                [
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.form.deputi,
+                                          expression: "form.deputi"
+                                        }
+                                      ],
+                                      staticClass:
+                                        "shadow border rounded w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                                      attrs: {
+                                        id: "tipe_akun",
+                                        name: "tipeAkun",
+                                        placeholder: "Please select one"
+                                      },
+                                      on: {
+                                        change: function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.$set(
+                                            _vm.form,
+                                            "deputi",
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "option",
+                                        { attrs: { disabled: "", value: "" } },
+                                        [_vm._v("Please select one")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Deputi 1" } },
+                                        [_vm._v("Deputi 1")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Deputi 2" } },
+                                        [_vm._v("Deputi 2")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Deputi 3" } },
+                                        [_vm._v("Deputi 3")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Deputi 4" } },
+                                        [_vm._v("Deputi 4")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Pusat-Pusat" } },
+                                        [_vm._v("Pusat-Pusat")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Sestama" } },
+                                        [_vm._v("Sestama")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Inspektorat" } },
+                                        [_vm._v("Inspektorat")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Balai Besar" } },
+                                        [_vm._v("Balai Besar")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Balai" } },
+                                        [_vm._v("Balai")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Loka" } },
+                                        [_vm._v("Loka")]
+                                      )
+                                    ]
+                                  )
+                                ]
+                              ),
                               _vm._v(" "),
                               _vm.errors.deputi != null
                                 ? _c("div", { staticClass: "text-red-500" }, [
@@ -59753,6 +59991,102 @@ var render = function() {
                                     _vm._v(
                                       "\n                    " +
                                         _vm._s(_vm.errors.jumlahPegawai) +
+                                        "\n                  "
+                                    )
+                                  ])
+                                : _vm._e()
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "mb-4" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "block text-gray-700 text-sm font-bold mb-2",
+                                  attrs: { for: "formControlInput1" }
+                                },
+                                [_vm._v("Wilayah Kerja:")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "col-span-6 sm:col-span-3" },
+                                [
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.form.idWilayah,
+                                          expression: "form.idWilayah"
+                                        }
+                                      ],
+                                      staticClass:
+                                        "shadow border rounded w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                                      attrs: {
+                                        id: "tipe_akun",
+                                        name: "tipeAkun",
+                                        placeholder: "Please select one"
+                                      },
+                                      on: {
+                                        change: function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.$set(
+                                            _vm.form,
+                                            "idWilayah",
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "option",
+                                        { attrs: { disabled: "", value: "" } },
+                                        [_vm._v("Please select one")]
+                                      ),
+                                      _vm._v(" "),
+                                      _vm._l(_vm.idWilayah, function(option) {
+                                        return _c(
+                                          "option",
+                                          { domProps: { value: option.id } },
+                                          [
+                                            _vm._v(
+                                              "\n                        " +
+                                                _vm._s(option.nama_wilayah) +
+                                                "\n                      "
+                                            )
+                                          ]
+                                        )
+                                      })
+                                    ],
+                                    2
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _vm.errors.idWilayah != null
+                                ? _c("div", { staticClass: "text-red-500" }, [
+                                    _vm._v(
+                                      "\n                    " +
+                                        _vm._s(_vm.errors.idWilayah) +
                                         "\n                  "
                                     )
                                   ])
@@ -64164,6 +64498,20 @@ var render = function() {
                                                 "th",
                                                 {
                                                   staticClass:
+                                                    "px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+                                                  attrs: { scope: "col" }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                          Wilayah Kerja\n                        "
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "th",
+                                                {
+                                                  staticClass:
                                                     "relative px-6 py-2",
                                                   attrs: { scope: "col" }
                                                 },
@@ -64230,6 +64578,34 @@ var render = function() {
                                                       "\n                        "
                                                   )
                                                 ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                {
+                                                  staticClass:
+                                                    "px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                                                },
+                                                [
+                                                  _vm._l(x.wilayah, function(
+                                                    data,
+                                                    tipe_akun
+                                                  ) {
+                                                    return [
+                                                      tipe_akun ===
+                                                      "nama_wilayah"
+                                                        ? _c("div", [
+                                                            _vm._v(
+                                                              "\n                              " +
+                                                                _vm._s(data) +
+                                                                "\n                            "
+                                                            )
+                                                          ])
+                                                        : _vm._e()
+                                                    ]
+                                                  })
+                                                ],
+                                                2
                                               ),
                                               _vm._v(" "),
                                               _c(
@@ -64344,39 +64720,155 @@ var render = function() {
                                             "block text-gray-700 text-sm font-bold mb-2",
                                           attrs: { for: "formControlInput1" }
                                         },
-                                        [_vm._v("Deputi:")]
+                                        [_vm._v("Deputi/Tipe Balai/Loka:")]
                                       ),
                                       _vm._v(" "),
-                                      _c("input", {
-                                        directives: [
-                                          {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value: _vm.form.deputi,
-                                            expression: "form.deputi"
-                                          }
-                                        ],
-                                        staticClass:
-                                          "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
-                                        attrs: {
-                                          type: "text",
-                                          id: "formControlInput1",
-                                          placeholder: "Enter Nama Deputi"
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "col-span-6 sm:col-span-3"
                                         },
-                                        domProps: { value: _vm.form.deputi },
-                                        on: {
-                                          input: function($event) {
-                                            if ($event.target.composing) {
-                                              return
-                                            }
-                                            _vm.$set(
-                                              _vm.form,
-                                              "deputi",
-                                              $event.target.value
-                                            )
-                                          }
-                                        }
-                                      }),
+                                        [
+                                          _c(
+                                            "select",
+                                            {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.form.deputi,
+                                                  expression: "form.deputi"
+                                                }
+                                              ],
+                                              staticClass:
+                                                "shadow border rounded w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                                              attrs: {
+                                                id: "tipe_akun",
+                                                name: "tipeAkun",
+                                                placeholder: "Please select one"
+                                              },
+                                              on: {
+                                                change: function($event) {
+                                                  var $$selectedVal = Array.prototype.filter
+                                                    .call(
+                                                      $event.target.options,
+                                                      function(o) {
+                                                        return o.selected
+                                                      }
+                                                    )
+                                                    .map(function(o) {
+                                                      var val =
+                                                        "_value" in o
+                                                          ? o._value
+                                                          : o.value
+                                                      return val
+                                                    })
+                                                  _vm.$set(
+                                                    _vm.form,
+                                                    "deputi",
+                                                    $event.target.multiple
+                                                      ? $$selectedVal
+                                                      : $$selectedVal[0]
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "option",
+                                                {
+                                                  attrs: {
+                                                    disabled: "",
+                                                    value: ""
+                                                  }
+                                                },
+                                                [_vm._v("Please select one")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "option",
+                                                {
+                                                  attrs: { value: "Deputi 1" }
+                                                },
+                                                [_vm._v("Deputi 1")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "option",
+                                                {
+                                                  attrs: { value: "Deputi 2" }
+                                                },
+                                                [_vm._v("Deputi 2")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "option",
+                                                {
+                                                  attrs: { value: "Deputi 3" }
+                                                },
+                                                [_vm._v("Deputi 3")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "option",
+                                                {
+                                                  attrs: { value: "Deputi 4" }
+                                                },
+                                                [_vm._v("Deputi 4")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "option",
+                                                {
+                                                  attrs: {
+                                                    value: "Pusat-Pusat"
+                                                  }
+                                                },
+                                                [_vm._v("Pusat-Pusat")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "option",
+                                                { attrs: { value: "Sestama" } },
+                                                [_vm._v("Sestama")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "option",
+                                                {
+                                                  attrs: {
+                                                    value: "Inspektorat"
+                                                  }
+                                                },
+                                                [_vm._v("Inspektorat")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "option",
+                                                {
+                                                  attrs: {
+                                                    value: "Balai Besar"
+                                                  }
+                                                },
+                                                [_vm._v("Balai Besar")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "option",
+                                                { attrs: { value: "Balai" } },
+                                                [_vm._v("Balai")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "option",
+                                                { attrs: { value: "Loka" } },
+                                                [_vm._v("Loka")]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      ),
                                       _vm._v(" "),
                                       _vm.errors.deputi != null
                                         ? _c(
@@ -64504,6 +64996,122 @@ var render = function() {
                                                   _vm._s(
                                                     _vm.errors.jumlahPegawai
                                                   ) +
+                                                  "\n                  "
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e()
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "mb-4" }, [
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "block text-gray-700 text-sm font-bold mb-2",
+                                          attrs: { for: "formControlInput1" }
+                                        },
+                                        [_vm._v("Wilayah Kerja:")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "col-span-6 sm:col-span-3"
+                                        },
+                                        [
+                                          _c(
+                                            "select",
+                                            {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.form.idWilayah,
+                                                  expression: "form.idWilayah"
+                                                }
+                                              ],
+                                              staticClass:
+                                                "shadow border rounded w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                                              attrs: {
+                                                id: "tipe_akun",
+                                                name: "tipeAkun",
+                                                placeholder: "Please select one"
+                                              },
+                                              on: {
+                                                change: function($event) {
+                                                  var $$selectedVal = Array.prototype.filter
+                                                    .call(
+                                                      $event.target.options,
+                                                      function(o) {
+                                                        return o.selected
+                                                      }
+                                                    )
+                                                    .map(function(o) {
+                                                      var val =
+                                                        "_value" in o
+                                                          ? o._value
+                                                          : o.value
+                                                      return val
+                                                    })
+                                                  _vm.$set(
+                                                    _vm.form,
+                                                    "idWilayah",
+                                                    $event.target.multiple
+                                                      ? $$selectedVal
+                                                      : $$selectedVal[0]
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "option",
+                                                {
+                                                  attrs: {
+                                                    disabled: "",
+                                                    value: ""
+                                                  }
+                                                },
+                                                [_vm._v("Please select one")]
+                                              ),
+                                              _vm._v(" "),
+                                              _vm._l(_vm.idWilayah, function(
+                                                option
+                                              ) {
+                                                return _c(
+                                                  "option",
+                                                  {
+                                                    domProps: {
+                                                      value: option.id
+                                                    }
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                        " +
+                                                        _vm._s(
+                                                          option.nama_wilayah
+                                                        ) +
+                                                        "\n                      "
+                                                    )
+                                                  ]
+                                                )
+                                              })
+                                            ],
+                                            2
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _vm.errors.idWilayah != null
+                                        ? _c(
+                                            "div",
+                                            { staticClass: "text-red-500" },
+                                            [
+                                              _vm._v(
+                                                "\n                    " +
+                                                  _vm._s(_vm.errors.idWilayah) +
                                                   "\n                  "
                                               )
                                             ]

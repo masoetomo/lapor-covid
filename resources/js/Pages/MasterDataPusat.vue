@@ -38,6 +38,13 @@
                             Jumlah Pegawai
                           </th>
 
+                          <th
+                            scope="col"
+                            class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                          >
+                            Wilayah Kerja
+                          </th>
+
                           <th scope="col" class="relative px-6 py-2">
                             <span class="sr-only">Edit</span>
                           </th>
@@ -59,6 +66,15 @@
                             class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
                           >
                             {{ x.jumlah_pegawai }}
+                          </td>
+                          <td
+                            class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                          >
+                            <template v-for="(data,tipe_akun) in x.wilayah">
+                              <div v-if="tipe_akun === 'nama_wilayah'">
+                                {{ data }}
+                              </div>
+                            </template>
                           </td>
                           <td
                             class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
@@ -118,16 +134,24 @@
                     <label
                       for="formControlInput1"
                       class="block text-gray-700 text-sm font-bold mb-2"
-                      >Deputi:</label
+                      >Deputi/Tipe Balai/Loka:</label
                     >
 
-                    <input
-                      type="text"
-                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="formControlInput1"
-                      placeholder="Enter Nama Deputi"
-                      v-model="form.deputi"
-                    />
+                    <div class="col-span-6 sm:col-span-3">
+                      <select v-model="form.deputi" id="tipe_akun" name="tipeAkun" placeholder="Please select one" class="shadow border rounded w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option disabled value="">Please select one</option>
+                        <option value="Deputi 1">Deputi 1</option>
+                        <option value="Deputi 2">Deputi 2</option>
+                        <option value="Deputi 3">Deputi 3</option>
+                        <option value="Deputi 4">Deputi 4</option>
+                        <option value="Pusat-Pusat">Pusat-Pusat</option>
+                        <option value="Sestama">Sestama</option>
+                        <option value="Inspektorat">Inspektorat</option>
+                        <option value="Balai Besar">Balai Besar</option>
+                        <option value="Balai">Balai</option>
+                        <option value="Loka">Loka</option>
+                      </select>
+                    </div>
                     <div v-if="errors.deputi != null" class="text-red-500">
                       {{ errors.deputi }}
                     </div>
@@ -166,6 +190,25 @@
                     />
                     <div v-if="errors.jumlahPegawai != null" class="text-red-500">
                       {{ errors.jumlahPegawai }}
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <label
+                      for="formControlInput1"
+                      class="block text-gray-700 text-sm font-bold mb-2"
+                      >Wilayah Kerja:</label
+                    >
+
+                    <div class="col-span-6 sm:col-span-3">
+                      <select v-model="form.idWilayah" id="tipe_akun" name="tipeAkun" placeholder="Please select one" class="shadow border rounded w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option disabled value="">Please select one</option>
+                        <option v-for="option in idWilayah" v-bind:value="option.id">
+                          {{ option.nama_wilayah }}
+                        </option>
+                      </select>
+                    </div>
+                    <div v-if="errors.idWilayah != null" class="text-red-500">
+                      {{ errors.idWilayah }}
                     </div>
                   </div>
                 </div>
@@ -253,9 +296,11 @@ export default {
             unit: null,
 
             jumlahPegawai: null,
+            idWilayah: null,
             id: null,
             _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         },
+        idWilayah: {},
         DataMasters: []
       }
     },
@@ -283,6 +328,7 @@ export default {
                 deputi: null,
                 unit: null,
                 jumlahPegawai: null,
+                idWilayah: null,
                 id: null,
             }
         },
@@ -345,13 +391,27 @@ export default {
           })
         }
       },
+      async getMasterDataWilayahAkun(){
+        try {
+          this.loading = true;
+          const res = await axios.get('api/datawilayah');
+          console.log(res.data.data);
+          this.idWilayah = res.data.data;
+          this.loading = false;
+        }
+        catch(err){
+        console.log(err);
+        this.loading = false;
+        }
+      },
       async showDataMaster(id){
         try {
           const res = await axios.get('api/datapusat/'+id);
           // console.log(res.data.tanggal);
           this.form.deputi = res.data.deputi;
           this.form.unit = res.data.unit;
-          this.form.jumlahPegawai = res.data.jumlah_pegawai
+          this.form.jumlahPegawai = res.data.jumlah_pegawai;
+          this.form.idWilayah = res.data.id_wilayah
           this.form.id = id;
         }
         catch(err){
@@ -361,6 +421,7 @@ export default {
     },
     created(){
       this.getMasterData();
+      this.getMasterDataWilayahAkun();
     }   
 }
 </script>
