@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardChartController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MasterUnitController;
@@ -27,3 +28,4 @@ Route::apiResource('dataloka','App\Http\Controllers\MasterLokaController')->midd
 Route::apiResource('datauser','App\Http\Controllers\Master\MasterUserController')->middleware('api');
 Route::apiResource('data-tipe-akun','App\Http\Controllers\Master\TipeAkunController')->middleware('api');
 Route::get('/datapusat/get-unit/{wilayah}', [MasterUnitController::class, 'getUnit'])->middleware('api');
+Route::get('/data-dashboard', [DashboardChartController::class, 'index'])->middleware('api');

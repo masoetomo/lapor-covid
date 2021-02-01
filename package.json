@@ -27,7 +27,9 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "apexcharts": "^3.23.1",
         "sweetalert2": "^10.12.7",
+        "vue-apexcharts": "^1.6.0",
         "vue2-datepicker": "^3.8.2"
     }
 }

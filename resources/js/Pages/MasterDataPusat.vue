@@ -339,7 +339,7 @@ export default {
             console.log(pageNum);
             try {
             const res = await axios.get('api/datapusat?page='+pageNum);
-            console.log(res.data.data);
+            // console.log(res.data.data);
             this.DataMasters = res.data.data;
             this.pagination.total = res.data.total;
             this.pagination.per_page = res.data.per_page;

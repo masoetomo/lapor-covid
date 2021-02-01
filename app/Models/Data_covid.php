@@ -19,4 +19,9 @@ class Data_covid extends Model
         'tanggal',
         'id_user'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'id_user','id');
+    }
 }
