@@ -3129,6 +3129,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -3436,7 +3441,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
  // import datepicker from '../../../node_modules/js-datepicker'
 
 
@@ -3452,8 +3456,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       errors: [],
       editMode: false,
       isOpen: false,
-      // csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-      // _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+      disabledBefore: new Date(2021, 10, 2),
+      disabledAfter: new Date(2021, 10, 6),
       form: {
         dalamPerawatan: null,
         penambahanKasus: null,
@@ -4109,6 +4113,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
 //
 //
 //
@@ -5775,6 +5780,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       series: [{
         name: 'series-1',
         data: [55, 62, 89, 66, 98, 72, 101, 75, 94, 120, 117, 139]
+      }, {
+        name: 'series-2',
+        data: [20, 30, 78, 80, 40, 50, 90, 100, 78, 100, 127, 40]
       }]
     };
   },
@@ -6225,6 +6233,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 
 
@@ -6298,6 +6308,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         sakitBukanCovid: null,
         id: null
       };
+    },
+    compareToday: function compareToday(tanggal) {
+      var today = new Date();
+      today.setHours(0, 0, 0, 0); // console.log(tanggal)
+
+      var d = new Date(tanggal);
+      d.setHours(0, 0, 0, 0); // console.log(d+" + "+today)
+
+      if (d >= today) {
+        return "equal or greater";
+      }
+
+      return "wrong";
     },
     deleteDataCovid: function deleteDataCovid(data) {
       var _this = this;
@@ -7738,7 +7761,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     openModal: function openModal(id) {
-      // console.log("masuk");
       this.isOpen = true;
       this.showDataMaster(id);
     },
@@ -7767,15 +7789,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 current_page = _this.pagination.current_page;
                 pageNum = current_page ? current_page : 1;
-                console.log(pageNum);
-                _context.prev = 3;
-                _context.next = 6;
+                _context.prev = 2;
+                _context.next = 5;
                 return axios.get('api/datapusat?page=' + pageNum);
 
-              case 6:
+              case 5:
                 res = _context.sent;
-                // console.log(res.data.data);
-                _this.DataMasters = res.data.data;
+                console.log(res.data.data);
+
+                if (res.data.data in window) {
+                  _this.DataMasters = res.data;
+                } else {
+                  _this.DataMasters = res.data.data;
+                }
+
                 _this.pagination.total = res.data.total;
                 _this.pagination.per_page = res.data.per_page;
                 _this.pagination.to = res.data.to;
@@ -7787,7 +7814,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 16:
                 _context.prev = 16;
-                _context.t0 = _context["catch"](3);
+                _context.t0 = _context["catch"](2);
                 console.log(_context.t0);
 
               case 19:
@@ -7795,7 +7822,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context.stop();
             }
           }
-        }, _callee, null, [[3, 16]]);
+        }, _callee, null, [[2, 16]]);
       }))();
     },
     deleteDataMaster: function deleteDataMaster(data) {
@@ -7876,8 +7903,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context3.prev = 7;
                 _context3.t0 = _context3["catch"](0);
                 console.log(_context3.t0);
-                _this3.errors = _context3.t0.response.data.errors; // console.log(this.errors.dalamPerawatan);
-
+                _this3.errors = _context3.t0.response.data.errors;
                 Toast.fire({
                   icon: 'error'
                 });
@@ -7906,24 +7932,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 4:
                 res = _context4.sent;
-                console.log(res.data.data);
+                // console.log(res.data.data);
                 _this4.idWilayah = res.data.data;
                 _this4.loading = false;
-                _context4.next = 14;
+                _context4.next = 13;
                 break;
 
-              case 10:
-                _context4.prev = 10;
+              case 9:
+                _context4.prev = 9;
                 _context4.t0 = _context4["catch"](0);
                 console.log(_context4.t0);
                 _this4.loading = false;
 
-              case 14:
+              case 13:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, null, [[0, 10]]);
+        }, _callee4, null, [[0, 9]]);
       }))();
     },
     showDataMaster: function showDataMaster(id) {
@@ -58074,6 +58100,32 @@ var render = function() {
                     ],
                     1
                   )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.$page.user.tipe_akun === 2
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
+                    },
+                    [
+                      _c(
+                        "jet-nav-link",
+                        {
+                          attrs: {
+                            href: _vm.route("master-pusat"),
+                            active: _vm.route().current("master-pusat")
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                            Data unit\n                        "
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
                 : _vm._e()
             ]),
             _vm._v(" "),
@@ -58827,6 +58879,14 @@ var render = function() {
                                   staticClass: "shadow",
                                   attrs: {
                                     id: "formControlInput1",
+                                    "disabled-date": function(date) {
+                                      return (
+                                        date <
+                                        new Date().setDate(
+                                          new Date().getDate() - 1
+                                        )
+                                      )
+                                    },
                                     valueType: "format"
                                   },
                                   model: {
@@ -60139,44 +60199,46 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "mt-5 flex lg:mt-0 lg:ml-4" }, [
         _c("span", { staticClass: "sm:ml-3" }, [
-          _c(
-            "button",
-            {
-              staticClass:
-                "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
-              attrs: { type: "button" },
-              on: {
-                click: function($event) {
-                  return _vm.openModal()
-                }
-              }
-            },
-            [
-              _c(
-                "svg",
+          _vm.$page.user.tipe_akun === 1
+            ? _c(
+                "button",
                 {
-                  staticClass: "-ml-1 mr-2 h-5 w-5 text-gray-500",
-                  attrs: {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    viewBox: "0 0 20 20",
-                    fill: "currentColor",
-                    "aria-hidden": "true"
+                  staticClass:
+                    "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.openModal()
+                    }
                   }
                 },
                 [
-                  _c("path", {
-                    attrs: {
-                      "fill-rule": "evenodd",
-                      d:
-                        "M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z",
-                      "clip-rule": "evenodd"
-                    }
-                  })
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "-ml-1 mr-2 h-5 w-5 text-gray-500",
+                      attrs: {
+                        xmlns: "http://www.w3.org/2000/svg",
+                        viewBox: "0 0 20 20",
+                        fill: "currentColor",
+                        "aria-hidden": "true"
+                      }
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          "fill-rule": "evenodd",
+                          d:
+                            "M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z",
+                          "clip-rule": "evenodd"
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v("\n              Tambah Master Data\n          ")
                 ]
-              ),
-              _vm._v("\n              Tambah Master Data\n          ")
-            ]
-          )
+              )
+            : _vm._e()
         ])
       ])
     ]),
@@ -60705,7 +60767,7 @@ var staticRenderFns = [
           staticClass:
             "text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate"
         },
-        [_vm._v("\n          Master Data Pusat\n          ")]
+        [_vm._v("\n          Master Data Unit\n          ")]
       )
     ])
   },
@@ -63446,24 +63508,28 @@ var render = function() {
                                                     "px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
                                                 },
                                                 [
-                                                  _c(
-                                                    "a",
-                                                    {
-                                                      staticClass:
-                                                        "text-indigo-600 hover:text-indigo-900",
-                                                      attrs: { href: "#" },
-                                                      on: {
-                                                        click: function(
-                                                          $event
-                                                        ) {
-                                                          return _vm.openModal(
-                                                            x.id
-                                                          )
-                                                        }
-                                                      }
-                                                    },
-                                                    [_vm._v("Edit")]
-                                                  )
+                                                  _vm.compareToday(
+                                                    x.tanggal
+                                                  ) === "equal or greater"
+                                                    ? _c(
+                                                        "a",
+                                                        {
+                                                          staticClass:
+                                                            "text-indigo-600 hover:text-indigo-900",
+                                                          attrs: { href: "#" },
+                                                          on: {
+                                                            click: function(
+                                                              $event
+                                                            ) {
+                                                              return _vm.openModal(
+                                                                x.id
+                                                              )
+                                                            }
+                                                          }
+                                                        },
+                                                        [_vm._v("Edit")]
+                                                      )
+                                                    : _vm._e()
                                                 ]
                                               )
                                             ])

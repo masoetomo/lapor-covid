@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Master_tipe_akun;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Master_unit;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MasterUnitController extends Controller
@@ -15,7 +16,14 @@ class MasterUnitController extends Controller
      */
     public function index()
     {
-        $data = Master_unit::with('wilayah')->paginate(5);
+        $id = Auth::id();
+        $akun = User::select()->select('tipe_akun','id_unit')->where('id',$id)->first();
+        if($akun->tipe_akun == 2){
+            $data = Master_unit::with('wilayah')->where('id',$akun->id_unit)->get();
+        }
+        else{
+            $data = Master_unit::with('wilayah')->paginate(10);
+        }
         return $data;
     }
 

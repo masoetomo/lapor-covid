@@ -64,6 +64,11 @@
                                 </template>
                             </jet-dropdown>
                         </div>
+                        <div v-if="$page.user.tipe_akun === 2" class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <jet-nav-link :href="route('master-pusat')" :active="route().current('master-pusat')">
+                                Data unit
+                            </jet-nav-link>
+                        </div>
                     </div>
 
                     <!-- Settings Dropdown -->

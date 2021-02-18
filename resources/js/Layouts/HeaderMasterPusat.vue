@@ -6,7 +6,7 @@
             <h2
             class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate"
             >
-            Master Data Pusat
+            Master Data Unit
             </h2>
         </div>
         <div class="mt-5 flex lg:mt-0 lg:ml-4">
@@ -14,6 +14,7 @@
             <span class="sm:ml-3">
                 <!-- <button @click="openModal()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3">Create New Post</button> -->
             <button
+                v-if="$page.user.tipe_akun === 1"
                 @click="openModal()"
                 type="button"
                 class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

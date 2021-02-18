@@ -106,7 +106,9 @@
                           <td
                             class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
                           >
+
                             <a
+                              v-if="compareToday(x.tanggal) === 'equal or greater'"
                               @click="openModal(x.id)"
                               href="#"
                               class="text-indigo-600 hover:text-indigo-900"
@@ -443,6 +445,19 @@ export default {
 
           }
 
+      },
+
+      compareToday: function (tanggal) {
+        var today = new Date();
+        today.setHours(0, 0, 0, 0);
+        // console.log(tanggal)
+        var d = new Date(tanggal);
+        d.setHours(0, 0, 0, 0);
+        // console.log(d+" + "+today)
+        if(d >= today){ 
+            return("equal or greater");
+        }
+        return "wrong";
       },
 
       async deleteDataCovid(data){

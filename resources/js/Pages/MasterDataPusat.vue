@@ -306,7 +306,6 @@ export default {
     },
     methods: {
         openModal: function (id) {
-            // console.log("masuk");
             this.isOpen = true;
             this.showDataMaster(id);
         },
@@ -336,11 +335,14 @@ export default {
         async getMasterData(){
             let current_page = this.pagination.current_page;
             let pageNum = current_page ? current_page : 1;
-            console.log(pageNum);
             try {
             const res = await axios.get('api/datapusat?page='+pageNum);
-            // console.log(res.data.data);
-            this.DataMasters = res.data.data;
+            console.log(res.data.data);
+            if(res.data.data in window){
+              this.DataMasters = res.data;
+            } else {
+              this.DataMasters = res.data.data;
+            }
             this.pagination.total = res.data.total;
             this.pagination.per_page = res.data.per_page;
             this.pagination.to = res.data.to;
@@ -385,7 +387,6 @@ export default {
         } catch (err) {
           console.log(err);
           this.errors = err.response.data.errors;
-          // console.log(this.errors.dalamPerawatan);
           Toast.fire({
             icon:'error'
           })
@@ -395,7 +396,7 @@ export default {
         try {
           this.loading = true;
           const res = await axios.get('api/datawilayah');
-          console.log(res.data.data);
+          // console.log(res.data.data);
           this.idWilayah = res.data.data;
           this.loading = false;
         }

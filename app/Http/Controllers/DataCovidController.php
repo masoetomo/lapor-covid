@@ -21,7 +21,7 @@ class DataCovidController extends Controller
     public function index()
     {
         $value = Auth::id();
-        $data = Data_covid::where('id_user', $value)->orderBy('tanggal','desc')->paginate(5);
+        $data = Data_covid::where('id_user', $value)->orderBy('tanggal','desc')->paginate(10);
         return $data;
         // return response()->json(
         //     new DataCovidCollection($data)
@@ -48,12 +48,12 @@ class DataCovidController extends Controller
     {
         $this->validate($request,[
             'date'=>'required|date',
-            'penambahanKasus'=>'required',
-            'dalamPerawatan'=>'required',
-            'penambahanSembuh'=>'required',
-            'sembuh'=>'required',
-            'meninggal'=>'required',
-            'sakitBukanCovid'=>'required'
+            'penambahanKasus'=>'required|numeric|min:0',
+            'dalamPerawatan'=>'required|numeric|min:0',
+            'penambahanSembuh'=>'required|numeric|min:0',
+            'sembuh'=>'required|numeric|min:0',
+            'meninggal'=>'required|numeric|min:0',
+            'sakitBukanCovid'=>'required|numeric|min:0'
         ]);
         // $value = Auth::id();
         $value = $request->session()->get('id');

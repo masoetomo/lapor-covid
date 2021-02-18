@@ -71,14 +71,13 @@
                       class="block text-gray-700 text-sm font-bold mb-2"
                       >Tanggal:</label
                     >
-                    <date-picker id="formControlInput1" class="shadow" v-model="form.date" valueType="format"></date-picker>
-                    <!-- <input
-                      type="text"
-                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="formControlInput1"
-                      placeholder="Enter Tanggal"
-                      v-model="form.tanggal"
-                    /> -->
+                    <date-picker
+                    id="formControlInput1" 
+                    class="shadow" 
+                    v-model="form.date"
+                    :disabled-date="(date) => date < new Date().setDate(new Date().getDate() - 1)"
+                    valueType="format">
+                    </date-picker>
 
                     <div v-if="errors.date != null" class="text-red-500">
                       {{ errors.date }}
@@ -272,9 +271,8 @@ import 'vue2-datepicker/index.css';
 
                 isOpen: false,
 
-                // csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-
-                // _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                disabledBefore: new Date(2021, 10, 2),
+                disabledAfter: new Date(2021, 10, 6),
 
                 form: {
 
